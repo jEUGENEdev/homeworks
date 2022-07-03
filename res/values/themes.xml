@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.Homeworks" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    
+    <style name="search" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/search_window_anim</item>
+    </style>
+</resources>

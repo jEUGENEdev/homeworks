@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Дневник</string>
+    <string name="heading_main">Предметы</string>
+    <string name="description_picture">picture</string>
+    <string name="add_lesson">Добавление предмета</string>
+    <string name="add_lesson_field">Введите название предмета</string>
+    <string name="pn">пн</string>
+    <string name="vt">вт</string>
+    <string name="sr">ср</string>
+    <string name="cht">чт</string>
+    <string name="pt">пт</string>
+    <string name="sb">сб</string>
+    <string name="time">Расписание</string>
+    <string name="add_lesson_button">Сохранить</string>
+    <string name="oops">Упс! Кажется, одно из полей заполнено неверно</string>
+    <string name="oops1">Такой предмет уже существует</string>
+    <string name="days">Дни:</string>
+    <string name="homework">Домашнее задание по текущему предмету</string>
+    <string name="edit">Изменить</string>
+    <string name="no">Отмена</string>
+    <string name="oops2">Домашнее задание уже редактируется</string>
+    <string name="oops3">Поле не может быть пустым</string>
+    <string name="oops4">Упс! Произошла ошибка</string>
+    <string name="search_window_text">Готовы искать?</string>
+    <string name="search_button">Искать</string>
+    <string name="lesson_name">Название</string>
+    <string name="lesson_day">День</string>
+    <string-array name="days">
+        <item>пн</item>
+        <item>вт</item>
+        <item>ср</item>
+        <item>чт</item>
+        <item>пт</item>
+        <item>сб</item>
+    </string-array>
+    <string name="filter">Сбросить фильтр</string>
+    <string name="days_filter">Дни недели</string>
+    <string name="desc_button">Создавайте и сортируйте!</string>
+    <string name="desc_button_secondary">Удерживайте кнопку, чтобы активировать режим фильтра учебных дисциплин</string>
+    <string name="desc_item">Просматривайте, редактируйте и удаляйте!</string>
+    <string name="desc_item_secondary">Удерживайте, чтобы удалить элемент, или нажмите на него, чтобы его редактировать</string>
+    <string name="desc_edit">Изменяйте задания!</string>
+    <string name="desc_edit_secondary">Нажмите, чтобы перейти в режим редактирования</string>
+    <string name="desc_homework">Обновляйте домашние задания!</string>
+    <string name="desc_homework_secondary">Здесь вы можете изменить домашнее задание по текущей учебной дисциплине</string>
+</resources>
