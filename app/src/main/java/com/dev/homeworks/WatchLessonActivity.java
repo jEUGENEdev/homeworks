@@ -3,7 +3,6 @@ package com.dev.homeworks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -25,6 +24,7 @@ import com.dev.homeworks.model.Lesson;
 import com.dev.homeworks.model.Photo;
 import com.dev.homeworks.utils.HiddenStatusBar;
 
+import java.util.List;
 import java.util.Random;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
@@ -36,7 +36,7 @@ public class WatchLessonActivity extends AppCompatActivity {
     private boolean enableHomework = false;
     private String id, lesson, dz;
     private RecyclerView photosList;
-    private Lesson lessonObj;
+    private List<Photo> uploadedPhotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,13 @@ public class WatchLessonActivity extends AppCompatActivity {
     }
 
     public void initPhotoRecyclerView() {
+        Database database = new Database(this);
+        uploadedPhotos = database.selectPhotoByLessonId(Integer.parseInt(id));
+        database.close();
         photosList = findViewById(R.id.uploads_photo);
-        if (getIntent().hasExtra(ConstantsSQL.TABLE_PHOTOS_NAME)) {
-            Lesson lesson = (Lesson) getIntent().getSerializableExtra(ConstantsSQL.TABLE_PHOTOS_NAME);
-            photosList.setAdapter(new UploadPhotoAdapter(lesson.getUploadedPhotos()));
-            photosList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            photosList.setHasFixedSize(true);
-        }
+        photosList.setAdapter(new UploadPhotoAdapter(uploadedPhotos, this));
+        photosList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        photosList.setHasFixedSize(true);
     }
 
     public void tapTarget() {
@@ -139,7 +139,6 @@ public class WatchLessonActivity extends AppCompatActivity {
             lesson = intent.getStringExtra(ConstantsSQL.TABLE_LESSONS_LESSON);
             dz = intent.getStringExtra(ConstantsSQL.TABLE_LESSONS_HOMEWORK_DESCRIPTION);
             id = intent.getStringExtra(ConstantsSQL.TABLE_LESSONS_ID);
-            lessonObj = (Lesson) intent.getSerializableExtra(ConstantsSQL.TABLE_PHOTOS_NAME);
             TextView lesson = findViewById(R.id.lesson);
             lesson.setText(this.lesson);
             homework.setText(dz);
@@ -152,13 +151,12 @@ public class WatchLessonActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 77723) {
-            Uri uri = data.getData();
+        if (requestCode == 77723 && data != null) {
             UploadPhotoAdapter uploadPhotoAdapter = (UploadPhotoAdapter) photosList.getAdapter();
-            uploadPhotoAdapter.getPhotos().add(new Photo(uri));
+            uploadedPhotos.add(new Photo(data.getData()));
             uploadPhotoAdapter.notifyItemInserted(uploadPhotoAdapter.getItemCount() - 1);
             Database database = new Database(this);
-            database.insertPhotoByLessonId(uri.getPath(), Integer.parseInt(lessonObj.getId()));
+            database.insertPhotoByLessonId(data.getData().getPath(), Integer.parseInt(id));
             database.close();
         }
     }

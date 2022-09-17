@@ -1,6 +1,8 @@
 package com.dev.homeworks.adapters;
 
+import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dev.homeworks.R;
 import com.dev.homeworks.model.Photo;
 
+import java.io.IOException;
 import java.util.List;
 
 public class UploadPhotoAdapter extends RecyclerView.Adapter<UploadPhotoAdapter.PhotoViewHolder> {
     private List<Photo> photos;
+    private Context ctx;
 
-    public UploadPhotoAdapter(List<Photo> photos) {
+    public UploadPhotoAdapter(List<Photo> photos, Context ctx) {
+        this.ctx = ctx;
         this.photos = photos;
     }
 
@@ -29,16 +34,16 @@ public class UploadPhotoAdapter extends RecyclerView.Adapter<UploadPhotoAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
-        holder.uploadedPhoto.setImageURI(photos.get(position).getPath());
+        try {
+            holder.uploadedPhoto.setImageBitmap(MediaStore.Images.Media.getBitmap(ctx.getContentResolver(), photos.get(position).getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
         return photos.size();
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
     }
 
     class PhotoViewHolder extends RecyclerView.ViewHolder {

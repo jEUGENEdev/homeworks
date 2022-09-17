@@ -72,10 +72,9 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.Holder> {
                 Lesson lesson = MainActivity.getLessons().get(getAdapterPosition());
                 intent.putExtra(ConstantsSQL.TABLE_LESSONS_LESSON, lesson.getNameLesson());
                 intent.putExtra(ConstantsSQL.TABLE_LESSONS_HOMEWORK_DESCRIPTION, lesson.getHomeworkDescription());
-                intent.putExtra(ConstantsSQL.TABLE_LESSONS_ID, String.valueOf(getAdapterPosition()));
+                intent.putExtra(ConstantsSQL.TABLE_LESSONS_ID, lesson.getId());
                 Database database = new Database(itemView.getContext());
                 lesson.setUploadedPhotos(database.selectPhotoByLessonId(Integer.parseInt(lesson.getId())));
-                intent.putExtra(ConstantsSQL.TABLE_PHOTOS_NAME, lesson);
                 database.close();
                 context.startActivity(intent);
             });

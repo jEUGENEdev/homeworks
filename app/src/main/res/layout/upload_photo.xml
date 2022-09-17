@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:contentDescription="@string/app_name"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:maxHeight="400dp"
+        app:srcCompat="@drawable/error_icon" />
 </LinearLayout>

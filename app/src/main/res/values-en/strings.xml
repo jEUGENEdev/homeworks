@@ -43,4 +43,5 @@
     <string name="desc_edit_secondary">Click to enter edit mode</string>
     <string name="desc_homework">Update your homework!</string>
     <string name="desc_homework_secondary">Here you can change the homework for the current academic discipline</string>
+    <string name="error_load_image">Failed to upload image</string>
 </resources>

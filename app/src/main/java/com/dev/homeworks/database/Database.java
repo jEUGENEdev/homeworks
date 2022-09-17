@@ -18,6 +18,11 @@ public class Database {
     public Database(Context context) {
         sqlConfig = new SQLConfig(context);
         database = sqlConfig.getWritableDatabase();
+
+//        Cursor cursor = database.rawQuery("SELECT * FROM photos;", null);
+//        while(cursor.moveToNext())
+//            Log.i("db info", cursor.getString(1));
+//        cursor.close();
     }
 
     public void close() {
@@ -89,5 +94,6 @@ public class Database {
     public void delete(String id) {
         database.execSQL("DELETE FROM " + ConstantsSQL.TABLE_NAME_LESSONS + " WHERE " + ConstantsSQL.TABLE_LESSONS_ID
                 + " = " + id + ";");
+        database.execSQL(String.format("DELETE FROM %s WHERE %s = %s;", ConstantsSQL.TABLE_PHOTOS_NAME, ConstantsSQL.TABLE_PHOTOS_LESSON_ID, id));
     }
 }

@@ -43,4 +43,5 @@
     <string name="desc_edit_secondary">Нажмите, чтобы перейти в режим редактирования</string>
     <string name="desc_homework">Обновляйте домашние задания!</string>
     <string name="desc_homework_secondary">Здесь вы можете изменить домашнее задание по текущей учебной дисциплине</string>
+    <string name="error_load_image">Не удалось загрузить изображение</string>
 </resources>
